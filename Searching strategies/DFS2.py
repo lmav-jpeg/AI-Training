@@ -1,13 +1,14 @@
 '''
-This code implement the recursive DFS algorithm.
-Keeping track of all nodes visited.
-And storing the last node visited to rebuild the path
+Implementation of the iterative algorithm of DFS.
+Using a stack
 
 @author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be
 @position CEO of JK AI
 '''
+
 from Node import *
 from graph import *
+from collections import deque
 
 class DFS:
     def __init__(self, start:'Node', goal:'Node', graph:'MyGraph'):
@@ -23,32 +24,37 @@ class DFS:
         self.visited = set()
         self.track = {}
         self.last_neighbor = None
+        self.stack = deque()
 
     def DFS(self, start):
-        '''
-        Traversal of the DFS algorithm.
-        :param start:
-        :return: None
-        '''
         if start not in self.visited:
             self.visited.add(start)
         begin_neighbors = self.graph.get_neighbors(start)
-        if begin_neighbors:
-            for neighbor in begin_neighbors:
-                if neighbor not in self.visited:
-                    self.visited.add(neighbor)
-                    if neighbor == self.goal:
-                        self.last_neighbor = start
-                        break
-                    self.track[neighbor] = start
-                    self.DFS(neighbor)
+        for neighbor in begin_neighbors:
+            if neighbor not in self.visited:
+                self.visited.add(neighbor)
+                self.stack.append(neighbor)
+                self.track[neighbor] = start
+
+        while self.stack:
+            current = self.stack.pop()
+            if current == self.goal:
+                self.last_neighbor = current
+                break
+            ongoing_neighbors = self.graph.get_neighbors(current)
+            for neighbor1 in ongoing_neighbors:
+                if neighbor1 not in self.visited:
+                    self.visited.add(neighbor1)
+                    self.stack.append(neighbor1)
+                    self.track[neighbor1] = current
+
 
     def path_building(self):
         '''
         Building a path backward from goal to start.
-        :return: str
+        :return: string representing the path from start to goal.
         '''
-        path = str(self.last_neighbor) + ' -> ' + str(self.goal)
+        path = str(self.last_neighbor)
         predecessor = self.last_neighbor
         while predecessor != self.start:
             predecessor = self.track[predecessor]
@@ -57,10 +63,7 @@ class DFS:
 
 
 
-'''
-Test case
-'''
-
+#Test
 A = Node("A")
 B = Node("B")
 C = Node("C")
