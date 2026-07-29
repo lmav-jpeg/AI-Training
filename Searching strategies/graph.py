@@ -1,4 +1,4 @@
-class Graph:
+class MyGraph:
     def __init__(self):
         self.nodes = {}
         self.count = 0
@@ -27,6 +27,10 @@ class Graph:
 
     def contains(self, node:'Node'):
          return node in self.nodes.keys()
+
+    def get_neighbors(self, node:'Node'):
+        return self.nodes[node]
+
 
 
 
