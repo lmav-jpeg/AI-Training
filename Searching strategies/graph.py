@@ -39,6 +39,12 @@ class MyGraph:
     def get_neighbors(self, node:'Node'):
         return self.nodes[node]
 
+    def get_edges_weights(self, node1:'Node', node2:'Node'):
+        return self.edges[(node1, node2)]
+
+    def get_nodes(self):
+        return self.nodes
+
 
 
 
