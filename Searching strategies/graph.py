@@ -1,3 +1,11 @@
+'''
+This class is the base of all search strategies.
+It contains the functions enabling the creation
+of a graph
+
+@author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be
+@position CEO of JK AI
+'''
 class MyGraph:
     def __init__(self):
         self.nodes = {}
