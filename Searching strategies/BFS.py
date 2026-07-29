@@ -1,6 +1,6 @@
 '''
 Implementation of the iterative algorithm BFS.
-Using a queue
+Using a built-in function queue
 
 @author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be
 @position CEO of JK AI
