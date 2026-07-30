@@ -1,6 +1,9 @@
 """
-Tic Tac Toe Implementation Human versus Human
-Upcoming AI versus human
+This project implements Tic-Tac-Toe as a deterministic,
+zero-sum, perfect-information environment.
+The objective is to explore later adversarial search algorithms,
+beginning with Minimax and later Alpha-Beta pruning.
+
 @author Laurie MAVOUNGOU lmavoungou@outlook.be
 """
 from grid import GRID
@@ -29,8 +32,8 @@ class tictactoe:
         while not num_format.match(decider1):
             response1 = input("Player 1 enter your symbol and pick a number between 0 and 1."
                               "For example : X,0").split(',')
-            if not num_format.match(decider1):
-                decider1 = int(response[1])
+            if num_format.match(response1[1]):
+                decider1 = response1[1]
                 break
         decider1=int(decider1)
         self.player2 = input("Player 2 enter your symbol")
@@ -46,11 +49,14 @@ class tictactoe:
         column = 0
         while not self.game_over():
             print('player recognizing by',str(self.identities[who_start]),"enter your location in the form row,column")
-            row,column = map(int, input().split(','))
+            inp =input().split(',')
+            if len(inp)!=2:
+                continue
+            row,column = map(int, inp)
             num_format1 = re.compile(r'^[0-2]$')
             if not num_format1.match(str(row)) or not num_format1.match(str(column)):
                 print('player recognizing by', str(self.identities[who_start]),
-                      "enter your location in the form row,column")
+                      "enter your location in the form : row,column separated by comma")
             else:
                 if self.grid[row][column] != " ":
                     print('occupied cell')
@@ -60,10 +66,13 @@ class tictactoe:
                     print(row)
                 if self.game_over():
                     print('game over')
-                    if all(self.grid[i][i] == self.player1 for i in range(len(self.grid))):
-                        print('player 1 wins')
+                    winner = self.winner_identity()
+                    if winner==self.player1:
+                        print('Player 1 wins')
+                    elif winner==self.player2:
+                        print('Player 2 wins')
                     else:
-                        print('player 2 wins')
+                        print('tie')
                     break
                 who_start = 1 - who_start
 
@@ -74,35 +83,43 @@ class tictactoe:
         :return: bool
         '''
         size = len(self.grid)
+        if self.winner_identity() is not None:
+            return True
+        elif all(cell != " " for row in self.grid for cell in row):
+            return True
+        return False
+
+    def winner_identity(self):
+        size = len(self.grid)
         for i in range(size):
-            if (self.grid[i][0] == self.player1 and self.grid[i][1] == self.player1 and self.grid[i][2] == self.player1) or (self.grid[i][0] == self.player2 and self.grid[i][1] == self.player2 and self.grid [i][2] == self.player2):
-                return True
-            if (self.grid[0][i] == self.player1 and self.grid[1][i] == self.player1 and self.grid [2][i] == self.player1) or (self.grid[0][i]== self.player2 and self.grid[1][i] == self.player2 and self.grid [2][i] == self.player2):
-                return True
+            if (self.grid[i][0] == self.player1 and self.grid[i][1] == self.player1 and self.grid[i][2] == self.player1):
+                return self.player1
+            elif (self.grid[i][0] == self.player2 and self.grid[i][1] == self.player2 and self.grid [i][2] == self.player2):
+                return self.player2
+            if (self.grid[0][i] == self.player1 and self.grid[1][i] == self.player1 and self.grid [2][i] == self.player1):
+                return self.player1
+            elif (self.grid[0][i]== self.player2 and self.grid[1][i] == self.player2 and self.grid [2][i] == self.player2):
+                return self.player2
 
         diag1 = []
         for i in range(1):
             for j in range(0, len(self.grid) - i):
                 diag1.append(self.grid[i + j][j])
 
-        if all(value == self.player1 for value in diag1) or all(value == self.player2 for value in diag1):
-            return True
+        if all(value == self.player1 for value in diag1):
+            return self.player1
+        elif all(value == self.player2 for value in diag1):
+            return self.player2
         elif all(self.grid[i][size-1-i] == self.player1 for i in range(size)):
-            return True
-
+            return self.player1
         elif all(self.grid[i][size-1-i] == self.player2 for i in range(size)):
-            return True
-        elif all(cell != " " for row in self.grid for cell in row):
-            return True
-        return False
-
-    def player_identity(self):
-        pass
+            return self.player2
+        return None
 
 #Test
-grid = GRID()
-grid.build_grid()
-grid = grid.get_grid()
+grid = GRID() #instanciate the grid object to benefits from the methods
+grid.build_grid() # build the grid as a 2D array
+grid = grid.get_grid() #retrive the grid
 
-game = tictactoe(grid)
+game = tictactoe(grid) #instanciate the tictactoe object to start the game related to the grid
 game.game()
