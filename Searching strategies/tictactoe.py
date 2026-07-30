@@ -147,7 +147,7 @@ class tictactoe:
 #Test
 grid = GRID() #instanciate the grid object to benefits from the methods
 grid.build_grid() # build the grid as a 2D array
-grid = grid.get_grid() #retrive the grid
+grid = grid.get_grid() #retrieve the grid
 
 game = tictactoe(grid) #instanciate the tictactoe object to start the game related to the grid
 game.game()
