@@ -33,7 +33,7 @@ class tictactoe:
                 self.player1 = response[0]
                 decider1 = response[1]
                 break
-            except Exception as e:
+            except (ValueError, IndexError):
                 print("invalid input")
 
 
@@ -66,16 +66,12 @@ class tictactoe:
             try:
                 #Input validation
                 player_input =input().split(',')
-            except Exception as e:
+                if len(player_input) != 2:
+                    continue
+                row, column = map(int, player_input)
+            except (ValueError, IndexError):
                 print("Invalid input")
 
-            if len(player_input)!=2:
-                continue
-            try:
-                row, column = map(int, player_input)
-            except Exception as e:
-                print("Enter value in the format symbol,number separated by a comma")
-                continue
             num_format1 = re.compile(r'^[0-2]$')
             if not num_format1.match(str(row)) or not num_format1.match(str(column)):
                 continue
@@ -84,8 +80,8 @@ class tictactoe:
                     print('occupied cell')
                     continue
                 self.grid[row][column] = self.identities[who_start]
-                for row in self.grid:
-                    print(row)
+                for grid_row in self.grid:
+                    print(grid_row)
                 if self.game_over():
                     print('game over')
                     winner = self.winner_identity()
