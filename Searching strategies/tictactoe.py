@@ -24,11 +24,21 @@ class tictactoe:
         Game logic
         :return: None
         '''
-        response = input("Player 1 enter your symbol and pick a number between 0 and 1."
-                                              "For example : X,0").split(',')
-        self.player1 = response[0]
+
+        #input validation
+        while True:
+            try:
+                response = input("Player 1 enter your symbol and pick a number between 0 and 1."
+                                                  "For example : X,0").split(',')
+                self.player1 = response[0]
+                decider1 = response[1]
+                break
+            except Exception as e:
+                print("invalid input")
+
+
         num_format = re.compile(r'^[0-1]$')
-        decider1 = response[1]
+
         while not num_format.match(decider1):
             response1 = input("Player 1 enter your symbol and pick a number between 0 and 1."
                               "For example : X,0").split(',')
@@ -44,19 +54,31 @@ class tictactoe:
         self.identities[decider1]=self.player1
         self.identities[decider2]=self.player2
 
+        #Game starting by picking randomly a starter between the two players.
+        #This is the reason behind the existence of the decider variable.
+        #Player is identified by its symbols during the game.
+        #Input validation to make sure the player does not make mistakes
         who_start= randint(0,1)
         row = 0
         column = 0
         while not self.game_over():
-            print('player recognizing by',str(self.identities[who_start]),"enter your location in the form row,column")
-            inp =input().split(',')
-            if len(inp)!=2:
+            print('Player recognizing by',str(self.identities[who_start]),"enter your location in the form : row,column separated by a comma")
+            try:
+                #Input validation
+                player_input =input().split(',')
+            except Exception as e:
+                print("Invalid input")
+
+            if len(player_input)!=2:
                 continue
-            row,column = map(int, inp)
+            try:
+                row, column = map(int, player_input)
+            except Exception as e:
+                print("Enter value in the format symbol,number separated by a comma")
+                continue
             num_format1 = re.compile(r'^[0-2]$')
             if not num_format1.match(str(row)) or not num_format1.match(str(column)):
-                print('player recognizing by', str(self.identities[who_start]),
-                      "enter your location in the form : row,column separated by comma")
+                continue
             else:
                 if self.grid[row][column] != " ":
                     print('occupied cell')
@@ -74,7 +96,7 @@ class tictactoe:
                     else:
                         print('tie')
                     break
-                who_start = 1 - who_start
+                who_start = 1 - who_start #swicth between the two players throughout the game
 
 
     def game_over(self):
@@ -90,7 +112,12 @@ class tictactoe:
         return False
 
     def winner_identity(self):
+        '''
+        Return the winner of the game
+        :return: str or None
+        '''
         size = len(self.grid)
+        #Horizontal and vertical checking
         for i in range(size):
             if (self.grid[i][0] == self.player1 and self.grid[i][1] == self.player1 and self.grid[i][2] == self.player1):
                 return self.player1
@@ -101,6 +128,7 @@ class tictactoe:
             elif (self.grid[0][i]== self.player2 and self.grid[1][i] == self.player2 and self.grid [2][i] == self.player2):
                 return self.player2
 
+        #diagonals checking
         diag1 = []
         for i in range(1):
             for j in range(0, len(self.grid) - i):
