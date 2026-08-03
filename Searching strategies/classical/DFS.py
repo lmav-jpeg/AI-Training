@@ -1,5 +1,5 @@
 '''
-This code implement the recursive DFS algorithm.
+This code implement the recursive Depth First Search DFS algorithm.
 Keeping track of all nodes visited.
 And storing the last node visited to rebuild the path
 

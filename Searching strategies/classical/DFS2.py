@@ -1,5 +1,5 @@
 '''
-Implementation of the iterative algorithm of DFS.
+Implementation of the iterative algorithm of Depth First Search DFS.
 Using a stack
 
 @author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be

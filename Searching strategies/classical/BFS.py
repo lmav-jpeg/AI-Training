@@ -1,5 +1,5 @@
 '''
-Implementation of the iterative algorithm BFS.
+Implementation of the iterative algorithm Breadth-First Search BFS.
 Using a built-in function queue
 
 @author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be

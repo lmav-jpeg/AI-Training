@@ -15,6 +15,14 @@ class GRID:
     def get_size(self):
         return self.size
 
+    def available_moves(self):
+        available_moves = []
+        for row,i in range(self.size):
+            for column,j in range(self.size):
+                if column == " ":
+                    available_moves.append((i,j))
+        return available_moves
+
 
 # test
 grid = GRID()
