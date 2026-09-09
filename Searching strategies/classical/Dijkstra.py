@@ -84,6 +84,37 @@ class DIJKSTRA:
             path = str(predecessor) + ' -> ' + path
         return path
 
+    def path_building2(self):
+        '''Return the path from start to goal nodes objects
+        Used for Front End
+        :return: list of objects nodes from start to goal.'''
+
+        if self.last_neighbor is None:
+            return []
+
+        path = []
+
+        predecessor = self.last_neighbor
+
+        while predecessor != self.start:
+            path.append(predecessor)
+            predecessor = self.track[predecessor]
+
+        path.append(self.start)
+
+        path.reverse()
+
+        return path
+
+    def to_dict(self):
+        """
+        Build a dictionary representation of path from start to goal.
+        :return: dictionary
+        """
+        dct = {}
+        dct["path"] = [str(node) for node in self.path_building2()]
+        return dct
+
 
 
 #Test

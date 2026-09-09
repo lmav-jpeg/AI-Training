@@ -55,6 +55,30 @@ class DFS:
             path = str(predecessor) + ' -> ' + path
         return path
 
+    def path_building2(self):
+        if self.last_neighbor is None:
+            return []
+
+        path = []
+        path.append(self.goal)
+        predecessor = self.last_neighbor
+        while predecessor != self.start:
+            path.append(predecessor)
+            predecessor = self.track[predecessor]
+
+        path.append(self.start)
+        path.reverse()
+        return path
+
+    def to_dict(self):
+        """
+        Build a dictionary representation of path from start to goal.
+        :return: dictionary
+        """
+        dct = {}
+        dct["path"] = [str(node) for node in self.path_building2()]
+        return dct
+
 
 
 '''
@@ -82,3 +106,4 @@ dfs = DFS(A, F, graph)
 
 dfs.DFS(A)
 print("Path:", dfs.path_building())
+print("Path:", dfs.path_building2())

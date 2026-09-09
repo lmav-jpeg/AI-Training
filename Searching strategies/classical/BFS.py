@@ -47,6 +47,7 @@ class BFS:
                     self.visited.add(neighbor1)
                     self.queue.put(neighbor1)
                     self.track[neighbor1] = current
+        return self.path_building2()
 
 
     def path_building(self):
@@ -60,6 +61,38 @@ class BFS:
             predecessor = self.track[predecessor]
             path = str(predecessor) + ' -> ' + path
         return path
+
+    def path_building2(self):
+        '''Return the path from start to goal nodes objects
+        Used for Front End
+        :return: list of objects nodes from start to goal.'''
+
+        if self.last_neighbor is None:
+            return []
+
+        path = []
+
+        predecessor = self.last_neighbor
+
+        while predecessor != self.start:
+            path.append(predecessor)
+            predecessor = self.track[predecessor]
+
+        path.append(self.start)
+
+        path.reverse()
+
+        return path
+
+    def to_dict(self):
+        """
+        Build a dictionary representation of path from start to goal.
+        :return: dictionary
+        """
+        dct = {}
+        dct["path"] = [str(node) for node in self.path_building2()]
+        return dct
+
 
 
 
@@ -84,4 +117,4 @@ print("A's neighbors:", [str(node) for node in graph.get_neighbors(A)])
 bfs = BFS(A, F, graph)
 
 bfs.BFS(A)
-print("Path:", bfs.path_building())
+print("Path:", bfs.path_building2())
