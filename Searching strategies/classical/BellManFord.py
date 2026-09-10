@@ -1,8 +1,9 @@
 '''
 This class represents a Bell Man-Ford algorithm using Dynamic programming
-The procedure is described in the discord server as a paid content.
-Buy the lesson 3 course to get access to it
-Link to selling : https://lmav0242.gumroad.com/
+The detailed algorithm procedure and instructions are available as paid content through the Discord server.
+To access the complete procedure, please purchase **Lesson 3 part 2 ** of the AI Training.
+**Course:** [AI Training — Gumroad](https://lmav0242.gumroad.com/)
+
 @author: https://www.programiz.com/dsa/bellman-ford-algorithm
 @author : Laurie MAVOUNGOU CEO JK AI lmavoungou@outlook.be
 '''
