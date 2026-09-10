@@ -14,11 +14,13 @@ class MyGraph:
         self.nodes = {}
         self.count = 0
         self.edges = {}
+        self.adjacency_list = {}
         self.edges_track = []
 
     def add_node(self, node:'Node'):
         if node not in self.nodes:
             self.nodes[node] = []
+            self.adjacency_list[node] = []
             print("Node added")
             self.count += 1
         else:
@@ -34,12 +36,15 @@ class MyGraph:
             self.nodes[node1].append(node2)
         if node1 not in self.nodes[node2]:
             self.nodes[node2].append(node1)
+        self.adjacency_list[node1].append(node2)
         self.edges[(node1, node2)] = weight
         self.edges[(node2, node1)] = weight
         color= "#2ecc71" if status == "up" else "#ff4d4d"
         edge = Edge(node1, node2, weight, status, color)
         self.edges_track.append(edge)
 
+    def get_adjacency_list(self):
+        return self.adjacency_list
     def contains(self, node:'Node'):
          return node in self.nodes.keys()
 

@@ -5,7 +5,8 @@ from BFS import *
 from DFS import *
 from Dijkstra import *
 from astar import *
-
+from GreedyBFS import *
+from IterativeDDFS import *
 app = Flask(__name__)
 
 # 1. Create your graph
@@ -122,6 +123,37 @@ def get_graph4():
     astar_data = astar.to_dict()
     graph_data3.update(astar_data)
     return jsonify(graph_data3)
+
+# -------------------------
+# GRAPH + Greedy BFS
+# -------------------------
+@app.route("/api/gbfs", methods=["GET"])
+def get_graph5():
+    gbfs = GBFS(graph1, start, goal)
+    gbfs.heuristics_base(start, goal)
+    gbfs.gbfs_search(start, goal)
+    graph_data4 = graph1.to_dict()
+    gbfs_data = gbfs.to_dict()
+    graph_data4.update(gbfs_data)
+    return jsonify(graph_data4)
+
+# -------------------------
+# GRAPH + IDDFS
+# -------------------------
+# -------------------------
+# GRAPH + IDDFS
+# -------------------------
+@app.route("/api/iddfs", methods=["GET"])
+def get_graph6():
+    maxDepth = 10
+    instance = IDDFS(my_graph, node_a, node_f)
+    graph_data5 = my_graph.to_dict()
+    if instance.IDDFS(node_a, node_f, maxDepth) == True:
+        iddfs_data = instance.to_dict()
+        graph_data5.update(iddfs_data)
+    else:
+        graph_data5.update({"path": []})
+    return jsonify(graph_data5)
 
 if __name__ == "__main__":
     app.run(debug=True)
