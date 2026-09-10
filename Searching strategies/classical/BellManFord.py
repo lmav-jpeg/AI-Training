@@ -1,8 +1,8 @@
 '''
 This class represents a Bell Man-Ford algorithm using Dynamic programming
-The procedure is described in:
-    https://github.com/lmav-jpeg/AI-Training/blob/main/Searching%20strategies/classical/bellman_ford_algorithm_logic.md
-
+The procedure is described in the discord server as a paid content.
+Buy the lesson 3 course to get access to it
+Link to selling : https://lmav0242.gumroad.com/
 @author: https://www.programiz.com/dsa/bellman-ford-algorithm
 @author : Laurie MAVOUNGOU CEO JK AI lmavoungou@outlook.be
 '''
