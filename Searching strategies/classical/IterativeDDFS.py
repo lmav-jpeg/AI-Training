@@ -8,6 +8,7 @@ We only added the path building.
 
 from graph import *
 from Node import *
+
 class IDDFS():
     def __init__(self, graph:'MyGraph', start:'Node', goal:'Node'):
         self.graph = graph

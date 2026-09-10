@@ -1,7 +1,7 @@
 '''
 Implementation of the UCS algorithm.
 The procedure is described in:
-    https://github.com/lmav-jpeg/AI-Training/blob/main/Searching%20strategies/classical/astar_walkthrough.md
+    https://github.com/lmav-jpeg/AI-Training/blob/main/Searching%20strategies/classical/ucs_algorithm_logic.md
 
 @author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be
 @position CEO of JK AI
@@ -38,10 +38,8 @@ class UCS():
         while pq:
             cumulative_cost, _, current, path = heappop(pq)
             self.track[current] = path
-
             if current == goal:
                 return cumulative_cost, path
-
             if current in visited:
                 continue
 

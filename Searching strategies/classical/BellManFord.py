@@ -1,3 +1,12 @@
+'''
+This class represents a Bell Man-Ford algorithm using Dynamic programming
+The procedure is described in:
+    https://github.com/lmav-jpeg/AI-Training/blob/main/Searching%20strategies/classical/bellman_ford_algorithm_logic.md
+
+@author: https://www.programiz.com/dsa/bellman-ford-algorithm
+@author : Laurie MAVOUNGOU CEO JK AI lmavoungou@outlook.be
+'''
+
 from Node import *
 from graph import *
 class BellManFord:
@@ -7,7 +16,6 @@ class BellManFord:
         self.goal = goal
         self.distances = {}
         self.track ={}
-        self.last_neighbor = None
 
 
     def populating_the_table(self, start:'Node'):
@@ -23,6 +31,11 @@ class BellManFord:
                 self.distances[node] = float('inf')
 
     def bellman_ford(self, src):
+        '''
+        Bell Man-Ford core algorithm
+        :param src:
+        :return: updated distances or None
+        '''
         number_of_nodes = self.graph.get_number_of_nodes()
         self.edges = self.graph.get_edges()
         self.populating_the_table(src)
