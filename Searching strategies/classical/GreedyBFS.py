@@ -3,7 +3,7 @@ Implementation of the Greedy BFS algorithm.
 The detailed algorithm procedure and instructions are available as paid content through the Discord server.
 To access the complete procedure, please purchase **Lesson 3 part 2 ** of the AI Training.
 **Course:** [AI Training — Gumroad](https://lmav0242.gumroad.com/)
-@author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be
+@author Laurie MAVOUNGOU lmavoungou@outlook.be
 @position CEO of JK AI
 '''
 

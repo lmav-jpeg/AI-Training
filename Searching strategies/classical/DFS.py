@@ -3,7 +3,7 @@ This code implement the recursive Depth First Search DFS algorithm.
 Keeping track of all nodes visited.
 And storing the last node visited to rebuild the path
 
-@author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be
+@author Laurie MAVOUNGOU lmavoungou@outlook.be
 @position CEO of JK AI
 '''
 from Node import *

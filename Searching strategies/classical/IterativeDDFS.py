@@ -3,7 +3,7 @@ Implementation of Iterative DDFS.
 This implementation is based on the GeekForGeeks implementation in python.
 We only added the path building.
 @author Neelam Pandey GeeksForGeeks
-@author Laurie MAVOUNGOU  CEO JK AI lm9469@rit.edu
+@author Laurie MAVOUNGOU  CEO JK AI lmavoungou@outlook.be
 '''
 
 from graph import *

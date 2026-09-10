@@ -2,7 +2,7 @@
 Implementation of the iterative algorithm of Depth First Search DFS.
 Using a stack
 
-@author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be
+@author Laurie MAVOUNGOU  lmavoungou@outlook.be
 @position CEO of JK AI
 '''
 

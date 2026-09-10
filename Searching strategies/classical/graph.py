@@ -3,7 +3,7 @@ This class is the base of all search strategies.
 It contains the functions enabling the creation
 of a graph
 
-@author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be
+@author Laurie MAVOUNGOU lmavoungou@outlook.be
 @position CEO of JK AI
 '''
 

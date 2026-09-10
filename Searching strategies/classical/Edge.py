@@ -2,7 +2,7 @@
 This class serve as base for the front end graph representation
 It is the computational representation of an edge
 
-@author Laurie MAVOUNGOU lm9469@rit.edu lmavoungou@outlook.be
+@author Laurie MAVOUNGOU lmavoungou@outlook.be
 @position CEO of JK AI
 """
 class Edge:
