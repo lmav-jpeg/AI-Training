@@ -7,6 +7,10 @@ from Dijkstra import *
 from astar import *
 from GreedyBFS import *
 from IterativeDDFS import *
+from UCS import *
+from BellManFord import *
+
+
 app = Flask(__name__)
 
 # 1. Create your graph
@@ -137,9 +141,7 @@ def get_graph5():
     graph_data4.update(gbfs_data)
     return jsonify(graph_data4)
 
-# -------------------------
-# GRAPH + IDDFS
-# -------------------------
+
 # -------------------------
 # GRAPH + IDDFS
 # -------------------------
@@ -154,6 +156,30 @@ def get_graph6():
     else:
         graph_data5.update({"path": []})
     return jsonify(graph_data5)
+
+# -------------------------
+# GRAPH + UCS
+# -------------------------
+@app.route("/api/ucs", methods=["GET"])
+def get_graph7():
+    ucs = UCS(graph1, start, goal)
+    ucs.uniform_cost_search(start, goal)
+    graph_data6 = graph1.to_dict()
+    ucs_data = ucs.to_dict()
+    graph_data6.update(ucs_data)
+    return jsonify(graph_data6)
+
+# -------------------------
+# GRAPH + BellMan Ford
+# -------------------------
+@app.route("/api/bf", methods=["GET"])
+def get_graph8():
+    bf = BellManFord(graph1, start, goal)
+    bf.bellman_ford(A)
+    graph_data7 = graph1.to_dict()
+    bf_data = bf.to_dict()
+    graph_data7.update(bf_data)
+    return jsonify(graph_data7)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -117,4 +117,4 @@ print("A's neighbors:", [str(node) for node in graph.get_neighbors(A)])
 bfs = BFS(A, F, graph)
 
 bfs.BFS(A)
-print("Path:", bfs.path_building2())
+print("Path:", bfs.path_building())

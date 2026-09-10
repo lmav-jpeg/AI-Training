@@ -60,6 +60,10 @@ class MyGraph:
     def get_edges(self):
         return self.edges_track
 
+    def get_number_of_nodes(self):
+        return self.count
+
+
     def to_dict(self):
         # Convert whatever your internal structure is
         # into the simple format the frontend expects
