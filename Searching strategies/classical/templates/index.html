@@ -1,458 +1,154 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
-<title>Graph Search Visualization</title>
-
-<script
-    type="text/javascript"
-    src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js">
-</script>
-
-<style>
-
-    #controls {
-        margin-bottom: 15px;
-    }
-
-    button {
-        padding: 10px 20px;
-        margin-right: 10px;
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-    #mynetwork {
-        width: 600px;
-        height: 400px;
-        border: 1px solid lightgray;
-    }
-
-    #path {
-        margin-top: 15px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-</style>
-```
-
+    <title>Graph Search Visualization</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        #controls {
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #mynetwork {
+            width: 600px;
+            height: 400px;
+            border: 1px solid lightgray;
+        }
+        #path {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
 </head>
-
 <body>
 
-```
-<h1>Graph Search Visualization</h1>
-
-
-<!--
-========================================
-ALGORITHM BUTTONS
-========================================
--->
-
-<div id="controls">
-
-    <button onclick="runAlgorithm('bfs')">
-        BFS
-    </button>
-
-    <button onclick="runAlgorithm('dfs')">
-        DFS
-    </button>
-
-    <button onclick="runAlgorithm('dijkstra')">
-        Dijkstra
-    </button>
-
-</div>
-
-
-<!--
-========================================
-GRAPH
-========================================
--->
-
-<div id="mynetwork"></div>
-
-
-<!--
-========================================
-PATH
-========================================
--->
-
-<div id="path">
-    Select an algorithm.
-</div>
-
-
-<script>
-
-
-    /*
-     * ========================================
-     * VIS.JS NETWORK
-     * ========================================
-     */
-
-    let network = null;
-
-
-
-    /*
-     * ========================================
-     * RUN ALGORITHM
-     * ========================================
-     */
-
-    function runAlgorithm(algorithm) {
-
-
-        fetch(`/api/${algorithm}`)
-
-
-            .then(res => res.json())
-
-
-            .then(data => {
-
-
-                console.log(
-                    `${algorithm.toUpperCase()} data:`,
-                    data
-                );
-
-
-
-                /*
-                 * ========================================
-                 * GET PATH
-                 * ========================================
-                 */
-
-                const path = data.path || [];
-
-
-                console.log(
-                    `${algorithm.toUpperCase()} path:`,
-                    path
-                );
-
-
-
-                /*
-                 * ========================================
-                 * DISPLAY PATH
-                 * ========================================
-                 */
-
-                document.getElementById("path").innerHTML =
-                    `${algorithm.toUpperCase()} Path: ` +
-                    (
-                        path.length > 0
-                            ? path.join(" → ")
-                            : "No path found"
-                    );
-
-
-
-                /*
-                 * ========================================
-                 * COLOR NODES
-                 * ========================================
-                 */
-
-                data.nodes.forEach(node => {
-
-
-                    const isPathNode =
-                        path.includes(node.id);
-
-
-
-                    if (isPathNode) {
-
-
-                        /*
-                         * Path node
-                         */
-
-                        node.color = {
-
-                            background: "#3498db",
-
-                            border: "#2c3e50"
-
-                        };
-
-
-                    } else {
-
-
-                        /*
-                         * Normal node
-                         */
-
-                        node.color = {
-
-                            background: "#2ecc71",
-
-                            border: "#2c3e50"
-
-                        };
-
-                    }
-
-                });
-
-
-
-                /*
-                 * ========================================
-                 * COLOR EDGES
-                 * ========================================
-                 */
-
-                data.edges.forEach(edge => {
-
-
-                    const fromIndex =
-                        path.indexOf(edge.from);
-
-
-                    const toIndex =
-                        path.indexOf(edge.to);
-
-
-
-                    /*
-                     * An edge belongs to the path
-                     * if its two nodes are consecutive
-                     * in the algorithm path.
-                     */
-
-                    const isPathEdge =
-                        fromIndex !== -1 &&
-                        toIndex !== -1 &&
-                        Math.abs(fromIndex - toIndex) === 1;
-
-
-
-                    if (isPathEdge) {
-
-
-                        /*
-                         * Path edge
-                         */
-
-                        edge.color = "#3498db";
-
-                        edge.width = 6;
-
-
-                    } else {
-
-
-                        /*
-                         * Normal edge
-                         */
-
-                        edge.color = "#95a5a6";
-
-                        edge.width = 2;
-
-                    }
-
-
-
-                    /*
-                     * ========================================
-                     * DISPLAY EDGE WEIGHT
-                     * ========================================
-                     *
-                     * Dijkstra uses edge weights.
-                     *
-                     * If the weight is 0, we don't need
-                     * to display it.
-                     */
-
-                    if (
-                        edge.weight !== undefined &&
-                        edge.weight !== null &&
-                        edge.weight !== 0
-                    ) {
-
-                        edge.label = String(edge.weight);
-
-                    }
-
-                });
-
-
-
-                /*
-                 * ========================================
-                 * GRAPH DATA
-                 * ========================================
-                 */
-
-                const graphData = {
-
-
-                    nodes:
-                        new vis.DataSet(data.nodes),
-
-
-                    edges:
-                        new vis.DataSet(data.edges)
-
-                };
-
-
-
-                /*
-                 * ========================================
-                 * VIS.JS OPTIONS
-                 * ========================================
-                 */
-
-                const options = {
-
-
-                    nodes: {
-
-                        shape: "dot",
-
-                        size: 25,
-
-                        font: {
-
-                            size: 18
-
+    <h1>Graph Search Visualization</h1>
+
+    <!-- ALGORITHM BUTTONS -->
+    <div id="controls">
+        <button onclick="runAlgorithm('bfs')">BFS</button>
+        <button onclick="runAlgorithm('dfs')">DFS</button>
+        <button onclick="runAlgorithm('dijkstra')">Dijkstra</button>
+        <button onclick="runAlgorithm('astar')">A*</button>
+    </div>
+
+    <!-- GRAPH -->
+    <div id="mynetwork"></div>
+
+    <!-- PATH -->
+    <div id="path">
+        Select an algorithm.
+    </div>
+
+    <script>
+        let network = null;
+
+        function runAlgorithm(algorithm) {
+            fetch(`/api/${algorithm}`)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(`${algorithm.toUpperCase()} data:`, data);
+
+                    const path = data.path || [];
+                    console.log(`${algorithm.toUpperCase()} path:`, path);
+
+                    // DISPLAY PATH
+                    document.getElementById("path").innerHTML =
+                        `${algorithm.toUpperCase()} Path: ` +
+                        (path.length > 0 ? path.join(" → ") : "No path found");
+
+                    // COLOR NODES (Red if broken edge, Blue if path, Green if up)
+                    data.nodes.forEach(node => {
+                        const connectedEdges = data.edges.filter(e => e.from === node.id || e.to === node.id);
+                        const hasBrokenEdge = connectedEdges.some(e => e.status === 'broken');
+                        const isPathNode = path.includes(node.id);
+
+                        let bgColor = "#2ecc71"; // Default green (up)
+                        if (hasBrokenEdge) {
+                            bgColor = "#ff4d4d"; // Red if any connected edge is broken
+                        }
+                        if (isPathNode) {
+                            bgColor = "#3498db"; // Blue if part of the search path
                         }
 
-                    },
+                        node.color = {
+                            background: bgColor,
+                            border: "#2c3e50"
+                        };
+                    });
 
+                    // COLOR EDGES
+                    data.edges.forEach(edge => {
+                        const fromIndex = path.indexOf(edge.from);
+                        const toIndex = path.indexOf(edge.to);
 
-                    edges: {
+                        const isPathEdge =
+                            fromIndex !== -1 &&
+                            toIndex !== -1 &&
+                            Math.abs(fromIndex - toIndex) === 1;
 
-                        width: 2,
+                        if (isPathEdge) {
+                            edge.color = "#3498db";
+                            edge.width = 6;
+                        } else if (edge.status === "broken") {
+                            edge.color = "#ff4d4d";
+                            edge.width = 2;
+                        } else {
+                            edge.color = "#95a5a6";
+                            edge.width = 2;
+                        }
 
-                        font: {
+                        // DISPLAY EDGE WEIGHT
+                        if (
+                            edge.weight !== undefined &&
+                            edge.weight !== null &&
+                            edge.weight !== 0
+                        ) {
+                            edge.label = String(edge.weight);
+                        }
+                    });
 
-                            size: 16,
+                    const graphData = {
+                        nodes: new vis.DataSet(data.nodes),
+                        edges: new vis.DataSet(data.edges)
+                    };
 
-                            align: "middle"
-
+                    const options = {
+                        nodes: {
+                            shape: "dot",
+                            size: 25,
+                            font: { size: 18 }
                         },
+                        edges: {
+                            width: 2,
+                            font: { size: 16, align: "middle" },
+                            smooth: { type: "cubicBezier", roundness: 0.2 }
+                        },
+                        physics: { stabilization: true }
+                    };
 
-                        smooth: {
+                    const container = document.getElementById("mynetwork");
 
-                            type: "cubicBezier",
-
-                            roundness: 0.2
-
-                        }
-
-                    },
-
-
-                    physics: {
-
-                        stabilization: true
-
+                    if (network !== null) {
+                        network.destroy();
                     }
 
-                };
+                    network = new vis.Network(container, graphData, options);
+                })
+                .catch(error => {
+                    console.error("Error loading algorithm:", error);
+                    document.getElementById("path").innerHTML = "Error running algorithm.";
+                });
+        }
 
-
-
-                /*
-                 * ========================================
-                 * CREATE / UPDATE NETWORK
-                 * ========================================
-                 */
-
-                const container =
-                    document.getElementById("mynetwork");
-
-
-
-                /*
-                 * If the network already exists,
-                 * destroy it before creating the
-                 * new visualization.
-                 */
-
-                if (network !== null) {
-
-                    network.destroy();
-
-                }
-
-
-
-                /*
-                 * Create new network
-                 */
-
-                network = new vis.Network(
-
-                    container,
-
-                    graphData,
-
-                    options
-
-                );
-
-            })
-
-
-            /*
-             * ========================================
-             * ERROR HANDLING
-             * ========================================
-             */
-
-            .catch(error => {
-
-
-                console.error(
-
-                    "Error loading algorithm:",
-
-                    error
-
-                );
-
-
-                document.getElementById("path").innerHTML =
-
-                    "Error running algorithm.";
-
-            });
-
-    }
-
-
-
-    /*
-     * ========================================
-     * LOAD BFS BY DEFAULT
-     * ========================================
-     */
-
-    runAlgorithm("bfs");
-
-
-</script>
-
+        // Load BFS by default on startup
+        runAlgorithm("bfs");
+    </script>
 </body>
-
 </html>

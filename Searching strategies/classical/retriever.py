@@ -4,7 +4,7 @@ from Node import *
 from BFS import *
 from DFS import *
 from Dijkstra import *
-
+from astar import *
 
 app = Flask(__name__)
 
@@ -50,6 +50,25 @@ graph2.add_edge(node_g, node_j,6)
 graph2.add_edge(node_h, node_k,8)
 graph2.add_edge(node_k, node_l,7)
 
+A = Node("A")
+B = Node("B")
+C = Node("C")
+D = Node("D")
+E = Node("E")
+F = Node("F")
+
+graph1 = MyGraph()
+start = A
+goal = F
+graph1.add_edge(A, B, 2)
+graph1.add_edge(A, C, 4)
+graph1.add_edge(A, D, 7)
+graph1.add_edge(B, E, 3)
+graph1.add_edge(C, E, 1)
+graph1.add_edge(D, F, 2)
+graph1.add_edge(E, F, 2)
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -91,6 +110,18 @@ def get_graph3():
     graph_data2.update(dijkstra_data)
     return jsonify(graph_data2)
 
+# -------------------------
+# GRAPH + A*
+# -------------------------
+@app.route("/api/astar", methods=["GET"])
+def get_graph4():
+    astar = AStar(graph1, start, goal)
+    astar.g_calculation_and_heuristics_base(start, goal)
+    astar.a_star_search(start, goal)
+    graph_data3 = graph1.to_dict()
+    astar_data = astar.to_dict()
+    graph_data3.update(astar_data)
+    return jsonify(graph_data3)
 
 if __name__ == "__main__":
     app.run(debug=True)
