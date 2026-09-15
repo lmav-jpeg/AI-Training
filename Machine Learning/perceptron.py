@@ -27,14 +27,14 @@ class Perceptron:
         Logits, Softmax Probabilities and Cross-Entropy Loss
         :return: None
         '''
-        # Logits (L): Linear layer output
+        # Logits (L): Linear layer output/pre-activation values
         L = (np.dot(self.x,self.w) + self.b).flatten()
 
         # Activation layer
         self.p = np.zeros(L.shape)
         sum_exp = np.sum(np.exp(L))
         for i in range (self.p.shape[0]):
-           self.p[i] = np.exp(L[i]) / sum_exp
+           self.p[i] = np.exp(L[i]) / sum_exp #post activation values
 
         self.ce_loss = - np.log(self.p[self.y])
 

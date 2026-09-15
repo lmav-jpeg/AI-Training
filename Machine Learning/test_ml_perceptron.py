@@ -1,4 +1,4 @@
-from perceptron import *
+from multi_layer_perceptron import *
 
 import numpy as np
 
@@ -9,12 +9,13 @@ w = np.random.randn(784, 10) * 0.01
 b = np.zeros((1, 10))
 y = 3  # Target class index
 
-print(f"x: {x}, b: {b}")
 # Instantiate and run execution cycle
-model = Perceptron(x, w, b, y)
+model = MLPerceptron(x,y)
+model.creation_architecture([784, 5, 10])
 model.forward()
 print(f"Initial Cross-Entropy Loss: {model.ce_loss:.4f}")
 for i in range(10):
+    model.backward()
     model.update(learning_rate=0.01)
 
     # Forward pass to verify loss decreases
