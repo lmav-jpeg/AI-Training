@@ -8,12 +8,8 @@ It serves as the foundational architecture for deep neural networks.
 
 This version is based on my original implementation and was reviewed
 and corrected with the assistance of Google Gemini.
-The corrections focused on matrix shapes, numerical stability,
-backpropagation, gradient updates, code organization,
-and implementation clarity.
-
-Both versions to document my learning process
-and the evolution of my implementation.
+Both versions are kept and presented to document my learning process
+and the evolution of the implementation.
 
 """
 import numpy as np

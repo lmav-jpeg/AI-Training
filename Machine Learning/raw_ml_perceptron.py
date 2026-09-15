@@ -5,14 +5,8 @@ It serves as the foundational output layer for deep neural networks
 
 @author: Laurie MAVOUNGOU CEO JK AI lmavoungou@outlook.be
 
-This code presents bugs on:
-- explicit 2D input handling;
-- 2D output representation;
-- vectorized softmax;
-- output-layer handling;
-- initialization;
-- update logic;
-- separation between forward/backward/update.
+Lesson learned: Gradient Descent can be implemented perfectly
+and still increase the loss if the gradient itself is wrong
 """
 import numpy as np
 
@@ -36,7 +30,7 @@ class RawMLPerceptron:
                 layer_sizes[i + 1]
             ) * 0.01
 
-            b = np.zeros(layer_sizes[i + 1])
+            b = np.zeros((1,layer_sizes[i + 1]))
 
             self.w_hidden.append(W)
             self.b_hidden.append(b)
@@ -47,7 +41,7 @@ class RawMLPerceptron:
             layer_sizes[-1]
         ) * 0.01
 
-        self.b_output = np.zeros(layer_sizes[-1])
+        self.b_output = np.zeros((1,layer_sizes[-1]))
 
     def activation(self, z, layer_index):
         if layer_index%2 == 0:
@@ -89,10 +83,10 @@ class RawMLPerceptron:
         L_shifted = L - np.max(L) #Tip to handle large number
         self.p = np.zeros(L_shifted.shape)
         sum_exp = np.sum(np.exp(L_shifted))
-        for i in range (self.p.shape[0]):
-           self.p[i] = np.exp(L_shifted[i]) / sum_exp #post activation values
+        for i in range(self.p.shape[1]):
+            self.p[0, i] = np.exp(L_shifted[0, i]) / sum_exp #post activation values
 
-        self.ce_loss = - np.log(self.p[self.y])
+        self.ce_loss = - np.log(self.p[0, self.y])
 
 
     def backward(self):
@@ -109,9 +103,9 @@ class RawMLPerceptron:
         # Populate element by element across all classes
         for j in range(self.p.shape[0]):
             if j == self.y:
-                logit_error[j] = self.p[j] - 1.0
+                logit_error[0,j] = self.p[0,j] - 1.0
             else:
-                logit_error[j] = self.p[j]
+                logit_error[0,j] = self.p[0,j]
 
         self.delta[-1] = logit_error
 
