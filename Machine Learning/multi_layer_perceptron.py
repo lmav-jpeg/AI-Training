@@ -3,7 +3,18 @@ This class represents a multi-class Perceptron (Multilayer Perceptron)
 model trained via Gradient Descent.
 It serves as the foundational architecture for deep neural networks.
 
-@author: Laurie MAVOUNGOU CEO JK AI lmavoungou@outlook.be - Refined by Gemini
+@author: Laurie MAVOUNGOU CEO JK AI lmavoungou@outlook.be
+@reviewer: Gemini
+
+This version is based on my original implementation and was reviewed
+and corrected with the assistance of Google Gemini.
+The corrections focused on matrix shapes, numerical stability,
+backpropagation, gradient updates, code organization,
+and implementation clarity.
+
+Both versions to document my learning process
+and the evolution of my implementation.
+
 """
 import numpy as np
 
