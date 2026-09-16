@@ -10,7 +10,7 @@ Tip from gpt
             sum_exp = np.sum(np.exp(L_shifted))
             self.p = np.exp(L_shifted) / sum_exp
 
-Lesson learned : lesson learn flatten is good
+Lesson learned : flatten is good
 for perceptron but can constitute an obstacle
 in expanding perceptron to multi layer perceptron
 """
