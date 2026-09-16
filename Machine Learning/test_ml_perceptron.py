@@ -1,4 +1,3 @@
-from multi_layer_perceptron import *
 from raw_ml_perceptron import *
 
 import numpy as np
@@ -12,7 +11,6 @@ y = 3  # Target class index
 
 # Instantiate and run execution cycle
 model = RawMLPerceptron(x,y)
-#or model = MLPerceptron(x,y)
 model.creation_architecture([784, 5, 10])
 model.forward()
 print(f"Initial Cross-Entropy Loss: {model.ce_loss:.4f}")

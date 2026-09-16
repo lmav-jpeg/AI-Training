@@ -12,8 +12,9 @@ Tip from gpt
 """
 import numpy as np
 
+
 class Perceptron:
-    def __init__(self,x,w,b,y):
+    def __init__(self, x, w, b, y):
         self.x = x
         self.w = w
         self.b = b
@@ -21,37 +22,38 @@ class Perceptron:
         self.ce_loss = None
         self.y = y
 
-
     def forward(self):
         '''
         Logits, Softmax Probabilities and Cross-Entropy Loss
         :return: None
         '''
+
         # Logits (L): Linear layer output/pre-activation values
-        L = (np.dot(self.x,self.w) + self.b).flatten()
+        L = np.dot(self.x, self.w) + self.b
 
         # Activation layer
         self.p = np.zeros(L.shape)
         sum_exp = np.sum(np.exp(L))
-        for i in range (self.p.shape[0]):
-           self.p[i] = np.exp(L[i]) / sum_exp #post activation values
 
-        self.ce_loss = - np.log(self.p[self.y])
+        for i in range(self.p.shape[1]):
+            self.p[0, i] = np.exp(L[0, i]) / sum_exp
 
+        self.ce_loss = -np.log(self.p[0, self.y])
 
     def backward(self):
         """
         Vectorized Gradient Signal
         :return: logit_error
         """
+
         logit_error = np.zeros(self.p.shape)
 
         # Populate element by element across all classes
-        for j in range(self.p.shape[0]):
+        for j in range(self.p.shape[1]):
             if j == self.y:
-                logit_error[j] = self.p[j] - 1.0
+                logit_error[0, j] = self.p[0, j] - 1.0
             else:
-                logit_error[j] = self.p[j]
+                logit_error[0, j] = self.p[0, j]
 
         return logit_error
 
@@ -59,11 +61,11 @@ class Perceptron:
         '''
         Weight Update and Bias Update
         :param learning_rate:
-        :return:None
+        :return: None
         '''
-        logit_error = self.backward().reshape(1,-1)
-        self.w = self.w - learning_rate *  self.x.T.dot(logit_error)
+
+        logit_error = self.backward()
+
+        self.w = self.w - learning_rate * self.x.T.dot(logit_error)
         self.b = self.b - learning_rate * logit_error
-
-
 
