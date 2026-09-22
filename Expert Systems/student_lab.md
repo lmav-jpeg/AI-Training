@@ -146,7 +146,7 @@ Observed:
     the expected configuration.
 ```
 
-Design your own explanation format.
+Design your own explanation format. Do not use real values.
 
 ---
 
