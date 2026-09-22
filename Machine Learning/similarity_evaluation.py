@@ -31,7 +31,7 @@ distances = pairwise_distances(X, metric="cosine")
 similarities = 1 - distances
 
 
-# Compare two images
+# Compare two images. Can be generalized with a double for loop
 i = 0
 j = 2
 
