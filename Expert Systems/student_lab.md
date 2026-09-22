@@ -204,7 +204,7 @@ Result:
 ⚠️ Anomaly detected.
 ```
 
-The system should identify the affected component.
+The system should identify the affected component. Do not use real values.
 
 ---
 
