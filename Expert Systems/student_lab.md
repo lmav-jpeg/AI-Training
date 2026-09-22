@@ -232,7 +232,7 @@ Your modified Python Expert System.
 
 Your modified SQL files.
 
-⚠️ **Do not include any real hardware identifiers data**  in a public repository.
+⚠️ **Do not include any data/values. Just the overall architecture**  in a public repository.
 
 Use the provided test data or fictional/sanitized identifiers.
 
