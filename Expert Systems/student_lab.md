@@ -27,7 +27,7 @@ The expected result is that the observed hardware is consistent with the informa
 
 ## 2. 🧪 Test the Expert System with Changes
 
-Modify and Run the `correction.sql` file to introduce changes to the expected hardware information.
+Modify and run the `correction.sql` file to introduce changes to the expected hardware information.
 
 Run the Python program again.
 
@@ -133,20 +133,14 @@ For example:
 
 Component: Disk
 
-Expected:
-    Model: ...
-    Serial Number: ...
-
-Observed:
-    Model: ...
-    Serial Number: ...
-
 🧠 Inference:
     Storage device information does not match
     the expected configuration.
 ```
 
-Design your own explanation format. Do not use real values.
+Design your own explanation format.
+
+**Do not include real hardware identifiers in example outputs.**
 
 ---
 
@@ -166,11 +160,20 @@ For your new component:
 
 1. 🔎 Identify the appropriate WMI class.
 2. 📥 Collect its hardware information.
-3. 🗄️ Add the necessary database table.
-4. 📚 Add expected data to the Knowledge Base.
-5. 🧠 Create verification rules.
-6. 🔗 Integrate the component into the inference process.
-7. 🧪 Test both matching and mismatching cases.
+3. 🗄️ Determine what information the Knowledge Base would need to store.
+4. 🧠 Create verification rules.
+5. 🔗 Integrate the component into the inference process.
+6. 🧪 Test both matching and mismatching cases.
+
+You may represent Knowledge Base values using **placeholders or fictional values** in your code.
+
+For example:
+
+```text
+<EXPECTED_SERIAL_NUMBER>
+<EXPECTED_PROCESSOR_ID>
+<EXPECTED_DISK_MODEL>
+```
 
 ---
 
@@ -204,7 +207,9 @@ Result:
 ⚠️ Anomaly detected.
 ```
 
-The system should identify the affected component. Do not use real values.
+The system should identify the affected component.
+
+**Do not present real hardware identifiers.**
 
 ---
 
@@ -220,21 +225,73 @@ Result:
 
 The system should report the relevant evidence.
 
+Use placeholders or fictional values in submitted examples.
+
 ---
 
-## 9. 📦 Deliverables
+## 9. 🔐 Hardware Data and Database Privacy
+
+This assignment involves collecting hardware information that may contain **unique identifiers belonging to a physical computer**.
+
+### ⚠️ Do not submit or publish your database.
+
+Your submission must **not contain**:
+
+* 🗄️ MySQL database dumps
+* 📄 SQL files containing your hardware information
+* 🔐 Real BIOS serial numbers
+* 🔐 Real motherboard serial numbers
+* 🔐 Real disk serial numbers
+* 🔐 Real processor IDs
+* 🔐 Real device identifiers
+* 🔐 Other unique hardware identifiers from your computer
+
+You may use your own computer and database **locally while developing and testing the system**.
+
+However, your submitted project must contain only the **code and documentation necessary to demonstrate your implementation**.
+
+If your code requires expected hardware values, use **placeholders or fictional values**, for example:
+
+```python
+expected_serial = "<EXPECTED_SERIAL_NUMBER>"
+expected_processor_id = "<EXPECTED_PROCESSOR_ID>"
+expected_disk_model = "<EXPECTED_DISK_MODEL>"
+```
+
+The purpose is to demonstrate how the Expert System **would interact with a Knowledge Base**, without submitting the actual Knowledge Base or personal hardware information.
+
+---
+
+## 10. 📦 Deliverables
 
 ### 💻 Code
 
-Your modified Python Expert System.
+Submit your modified Python Expert System.
+
+Your code should demonstrate:
+
+* 📥 Fact acquisition
+* 🧠 Working memory
+* 📚 Knowledge Base interaction
+* ⚙️ Inference rules
+* 💬 Explanation
+* 🧪 Testing
+
+Use placeholders or fictional values wherever expected hardware information must appear in the submitted code.
 
 ### 🗄️ Database
 
-Your modified SQL files.
+**Do not submit your database.**
 
-⚠️ **Do not include any data/values. Just the overall architecture**.
+Do not submit:
 
-Use the provided test data or fictional/sanitized identifiers.
+* MySQL dumps
+* SQL database files
+* Database exports
+* Tables containing your hardware information
+* Real hardware identifiers
+
+The database is used only as part of your **local development and testing environment**.
 
 ### 📝 Documentation
 
@@ -245,7 +302,7 @@ Include a short report containing:
 3. 🧠 **New rules added**
 4. ➕ **New hardware component added**
 5. 🧪 **Testing performed**
-6. 📊 **Example outputs**
+6. 📊 **Example outputs without real hardware values**
 7. 💡 **What you learned about Expert Systems**
 
 ---
