@@ -165,14 +165,14 @@ For your new component:
 5. 🔗 Integrate the component into the inference process.
 6. 🧪 Test both matching and mismatching cases.
 
-You may represent Knowledge Base values using **placeholders or fictional values** in your code.
+You may represent Knowledge Base values using **placeholders or fictional values** in your submitted code.
 
 For example:
 
-```text
-<EXPECTED_SERIAL_NUMBER>
-<EXPECTED_PROCESSOR_ID>
-<EXPECTED_DISK_MODEL>
+```python
+expected_serial = "<EXPECTED_SERIAL_NUMBER>"
+expected_processor_id = "<EXPECTED_PROCESSOR_ID>"
+expected_disk_model = "<EXPECTED_DISK_MODEL>"
 ```
 
 ---
@@ -238,7 +238,7 @@ This assignment involves collecting hardware information that may contain **uniq
 Your submission must **not contain**:
 
 * 🗄️ MySQL database dumps
-* 📄 SQL files containing your hardware information
+* 📄 SQL database files containing your hardware information
 * 🔐 Real BIOS serial numbers
 * 🔐 Real motherboard serial numbers
 * 🔐 Real disk serial numbers
@@ -262,7 +262,59 @@ The purpose is to demonstrate how the Expert System **would interact with a Know
 
 ---
 
-## 10. 📦 Deliverables
+## 10. 🤖 Important Policy on Generative AI & Academic Integrity
+
+### Generative AI Usage Note
+
+You are permitted to use **generative AI tools as an aid in writing your code**.
+
+However, if you choose to use generative AI, you must **explicitly mention its use in your submission**.
+
+You remain responsible for understanding, testing, correcting, and defending your work.
+
+### 📝 PDF Report
+
+A **LaTeX report template** will be provided.
+
+You may load the template into **Overleaf** and modify it directly to complete your report:
+
+[Overleaf](https://www.overleaf.com/)
+
+The accompanying **PDF report must be entirely written by you**.
+
+Generative AI may only be used for **minor grammar or spelling corrections** in the report.
+
+The report must explicitly document:
+
+* 🤖 **Which generative AI tools were used.**
+* 💻 **Which specific parts of the code were generated or assisted by AI.**
+* 🧠 **What you learned from using the AI tools.**
+* 🔧 **What you changed, corrected, or rejected from the AI-generated output.**
+* ⚙️ **The breakdown of the algorithm and its logic.**
+* 🧪 **Your testing process and results.**
+* ⚠️ **Any limitations, bugs, or mistakes you discovered.**
+
+The report should demonstrate that you understand the system rather than simply presenting an AI-generated solution.
+
+### 🗣️ Defense Session
+
+You will be required to **defend both your PDF report and your code during an interactive grading session**.
+
+During the session, you may be asked to:
+
+* Explain how your Expert System works.
+* Explain your inference rules.
+* Explain why you made particular implementation decisions.
+* Demonstrate your testing process.
+* Identify weaknesses or limitations in your implementation.
+* Modify or extend part of your code.
+* Explain any AI-assisted code that you used.
+
+You should therefore be able to **explain and defend every important part of your submission**.
+
+---
+
+## 11. 📦 Deliverables
 
 ### 💻 Code
 
@@ -293,9 +345,21 @@ Do not submit:
 
 The database is used only as part of your **local development and testing environment**.
 
+### 📄 PDF Report
+
+Submit the completed PDF report using the provided LaTeX template.
+
+The report must:
+
+* Be written by you.
+* Document any generative AI assistance.
+* Explain your algorithm and implementation.
+* Describe your testing and results.
+* Discuss limitations and mistakes discovered.
+
 ### 📝 Documentation
 
-Include a short report containing:
+Your report must include:
 
 1. 🔎 **Problems discovered**
 2. 🔧 **Changes made**
@@ -303,7 +367,8 @@ Include a short report containing:
 4. ➕ **New hardware component added**
 5. 🧪 **Testing performed**
 6. 📊 **Example outputs without real hardware values**
-7. 💡 **What you learned about Expert Systems**
+7. 🤖 **Generative AI usage, if applicable**
+8. 💡 **What you learned about Expert Systems**
 
 ---
 
