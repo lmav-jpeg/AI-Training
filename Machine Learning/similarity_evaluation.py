@@ -1,5 +1,5 @@
 """
-This is a prototype to I investigated how the choice of representation
+This is a prototype to an investigation of how the choice of representation
 affects medical-image similarity. I first established a pixel-space baseline,
 then fine-tuned a ResNet-18 representation on BreastMNIST and compared the resulting
  similarity distributions for same-label and different-label image pairs.
