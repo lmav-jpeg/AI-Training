@@ -1,5 +1,8 @@
 """
-This work evaluates pixel similarity and feature similarity.
+A prototype similarity engine that compares medical images
+using both raw pixel representations and learned deep feature embeddings,
+ providing the foundation for the upcoming interactive
+ Medical Image Similarity Explorer.
 """
 import torchvision
 from medmnist import *
