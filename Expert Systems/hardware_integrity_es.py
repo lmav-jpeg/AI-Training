@@ -248,8 +248,6 @@ def verify_bios(expected, observed):
 
     return results
 
-    return results
-
 def working_memory(expected, observed):
 
     problems = {}
