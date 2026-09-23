@@ -23,6 +23,9 @@ Students explore:
 * 🧠 Deep Learning
 * ⭐ Genetic Algorithms
 * 🔒 AI Security Concepts
+---
+## ⭐ AI-Assisted Development Statement
+**All code in this repository was developed with AI assistance (leveraging models like Gemini and GPT). The system architecture, experimental design, prompt formulation, code integration, testing, result interpretation, and limitation analyses were entirely driven, directed, and validated by the author.**
 
 ---
 
@@ -36,8 +39,6 @@ To access the complete paid training content, please purchase the available **AI
 
 **Course:** [AI Training — Gumroad](https://lmav0242.gumroad.com/)
 
-> **Important:** **All code in this repository was developed with AI assistance (leveraging models like Gemini and GPT). The system architecture, experimental design, prompt formulation, code integration, testing, result interpretation, and limitation analyses were entirely driven, directed, and validated by the author.**
-> The code available in this repository is intended to support hands-on learning. The paid training provides the detailed instruction, explanations, laboratory guidance, assessment, and mentoring needed to work through the material effectively.
-> 
+> **Important:**  The code available in this repository is intended to support hands-on learning. The paid training provides the detailed instruction, explanations, laboratory guidance, assessment, and mentoring needed to work through the material effectively.
 
 
