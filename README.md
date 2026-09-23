@@ -7,7 +7,7 @@ This repository provides **hands-on code examples** for AI training, helping stu
 * 🌐 **Search Algorithms:** BFS, DFS, Dijkstra, A* Search, IDDFS, Greedy Best-First Search, Uniform Cost Search, Bellman-Ford
 * 🎮 **Tic-Tac-Toe & Minimax:** Game logic and adversarial search
 * 🤖 **Machine Learning:** Building A Neural Network from scratch, Cosine Similarity 
-* ♟️ **Expert Systems**
+* ♟️ **Expert Systems** : Building an Expert System for Hardware Integrity Verification. This can be used as blueprint for other systems like Android and IOS.
 
 Students explore:
 
@@ -30,7 +30,7 @@ Students explore:
 
 This repository provides the **code and practical materials** used in the AI Training.
 
-The detailed laboratory, grading criteria, mentoring, algorithm walkthroughs, quizzes, PDFs, videos, and other instructional materials associated with each module are provided as **paid course content** through the related Discord server.
+The detailed mentoring, quizzes, PDFs, videos, and other instructional materials associated with each module are provided as **paid course content** through the related Discord server.
 
 To access the complete paid training content, please purchase the available **AI Training lessons and PDFs**.
 
