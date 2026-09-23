@@ -7,20 +7,18 @@ This repository provides **hands-on code examples** for AI training, helping stu
 * 🌐 **Search Algorithms:** BFS, DFS, Dijkstra, A* Search, IDDFS, Greedy Best-First Search, Uniform Cost Search, Bellman-Ford
 * 🎮 **Tic-Tac-Toe & Minimax:** Game logic and adversarial search
 * 🤖 **Machine Learning:** Building A Neural Network from scratch, Cosine Similarity 
-
+* ♟️ **Expert Systems**
 
 Students explore:
 
 * 🧩 Problem representation
 * 🧠 State evaluation
 * ⚙️ Algorithmic thinking
-* 🔍 Search strategies
 * 🧪 Testing and debugging
 * 💻 Practical implementation
 
 ### 🚀 Upcoming Topics
 
-* ♟️ Expert Systems
 * 🤖 More Machine Learning
 * 🧠 Deep Learning
 * ⭐ Genetic Algorithms
